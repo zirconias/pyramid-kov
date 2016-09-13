@@ -1,6 +1,7 @@
 from pyramid.view import view_defaults, view_config
 from ramid.models.user import User
 from ..models.organisation import Organisation
+from .user import *
 
 ORGANISATIONS = []
 
@@ -56,10 +57,14 @@ class OrganisationViews:
         organisation = first(x for x in ORGANISATIONS if x.id == id)
         if organisation:
             params = dict(self.request.params)
-            newuser = User(params["username"], params["first_name"], params["last_name"], params["password"],
-                           params["email"])
-            organisation.add_user(newuser)
-            return organisation
+            # newuser = User(params["username"], params["first_name"], params["last_name"], params["password"],
+            #                params["email"])
+            user = first(x for x in USERS if x.id == params["id_user"])
+            if user:
+                organisation.add_user(user)
+                return organisation
+            else:
+                return {'found': 'false', 'message': 'user not found'}
         else:
             return {'found': 'false', 'message': 'organisation not found'}
         return {}
