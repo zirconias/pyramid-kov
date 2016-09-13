@@ -16,7 +16,7 @@ class UserViews:
         self.context = context
         self.request = request
 
-    @view_config(route_name='get_all')
+    @view_config(route_name='get_all_users')
     def get_all(self):
         return USERS
 

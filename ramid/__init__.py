@@ -11,8 +11,13 @@ def main(global_config, **settings):
 
     config.add_route('add_user', '/users', request_method='POST')
     config.add_route('delete_user', '/users/{id}', request_method='DELETE')
-    config.add_route('get_all', '/users', request_method='GET')
+    config.add_route('get_all_users', '/users', request_method='GET')
     config.add_route('get_user', '/users/{id}', request_method='GET')
 
+    config.add_route('get_all_organisations', '/organisations', request_method='GET')
+    config.add_route('get_organisation', '/organisations/{id}', request_method='GET')
+    config.add_route('add_organisation', '/organisations', request_method='POST')
+    config.add_route('delete_organisation', '/organisations/{id}', request_method='DELETE')
+    config.add_route('add_organisation_user', '/organisations/{id}/addUser', request_method='POST')
     config.scan()
     return config.make_wsgi_app()

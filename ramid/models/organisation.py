@@ -15,3 +15,10 @@ class Organisation:
 
     def add_user(self, user):
         self.users.append(user)
+
+    def __json__(self, request):
+        return self.__dict__
+
+        # def __json__(self, request):
+        #     return {'id': self.id, 'name': self.name, 'description': self.description,
+        #             'contact': self.contact}
