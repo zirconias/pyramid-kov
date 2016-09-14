@@ -20,7 +20,18 @@ class OrganisationViews:
 
     @view_config(route_name='get_all_organisations')
     def get_all(self):
-        return ORGANISATIONS
+        orgs = ORGANISATIONS
+        name = self.request.params.get('name')
+        page = int(self.request.params.get('page', 0))
+        # return ORGANISATIONS[page:page + 2]
+        if name:
+            orgs = [x for x in orgs if name in x.name]
+
+        if page > 0:
+            paged_organisations = [orgs[i:i + 2] for i in range(0, len(orgs), 2)]
+            orgs = paged_organisations[page - 1]
+
+        return orgs
 
     @view_config(route_name='add_organisation')
     def add_organisation(self):
@@ -53,7 +64,6 @@ class OrganisationViews:
     @view_config(route_name='add_organisation_user')
     def add_organisation_user(self):
         id = self.request.matchdict['id']
-        print('org id : ', id)
         organisation = first(x for x in ORGANISATIONS if x.id == id)
         if organisation:
             params = dict(self.request.params)
