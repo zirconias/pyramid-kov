@@ -36,6 +36,12 @@ class OrganisationViews:
     @view_config(route_name='add_organisation')
     def add_organisation(self):
         params = dict(self.request.params)
+        if not str(params['name']).isalnum():
+            return {'created': 'false', 'message': 'please enter only alpha num chars'}
+
+        if (first(x for x in ORGANISATIONS if x.name == params['name'])):
+            return {'created': 'false', 'message': 'name already exists'}
+
         neworg = Organisation(params["name"], params["description"], params["contact"])
 
         ORGANISATIONS.append(neworg)
