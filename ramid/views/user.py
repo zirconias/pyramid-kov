@@ -18,7 +18,17 @@ class UserViews:
 
     @view_config(route_name='get_all_users')
     def get_all(self):
-        return USERS
+        usrs = USERS
+        username = self.request.params.get('username')
+        page = int(self.request.params.get('page', 0))
+        if username:
+            usrs = [x for x in usrs if username in x.username]
+
+        if page > 0:
+            paged_users = [usrs[i:i + 2] for i in range(0, len(usrs), 2)]
+            usrs = paged_users[page - 1]
+
+        return usrs
 
     @view_config(route_name='add_user')
     def add_user(self):
