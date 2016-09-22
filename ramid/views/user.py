@@ -32,12 +32,12 @@ class UserViews:
 
     @view_config(route_name='add_user')
     def add_user(self):
-        params = dict(self.request.params)
-        newuser = User(params["username"], params["first_name"], params["last_name"], params["password"],
-                       params["email"])
+        # params = dict(self.request.params)
+        print('json_body: ', self.request.json_body)
+        newuser = User(self.request.json_body)
 
         USERS.append(newuser)
-        return {'id': newuser.id, 'created': 'created'}
+        return {'id': newuser.id, 'username': newuser.username, 'created': 'created'}
 
     @view_config(route_name='get_user')
     def get_user(self):

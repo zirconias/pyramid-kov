@@ -1,0 +1,40 @@
+{% extends "base.jinja2" %}
+{% block title %}Users list{% endblock %}
+{% block content %}
+    <h1>list of users</h1>
+    <hr>
+
+    {% if request.params['username'] %}
+        <div class="alert alert-success">
+            <strong>{{ request.params['username'] }}</strong> created successfully.
+        </div>
+    {% endif %}
+
+    {% if users %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>username</th>
+                <th>email</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>actions</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <span>Currently there is no users</span>
+    {% endif %}
+    <hr>
+    <a href="{{ request.route_url('adduser') }}">
+        <button type="button" class="btn btn-success">Add user</button>
+    </a>
+
+{% endblock %}
