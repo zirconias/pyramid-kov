@@ -50,8 +50,8 @@ class UserViews:
 
     @view_config(route_name='delete_user')
     def delete_user(self):
-        # id = self.request.matchdict['id']
-        id = self.request.json_body['id']
+        id = self.request.matchdict['id']
+        # id = self.request.json_body['id']
         print(id)
         for user in USERS:
             if user.id == id:

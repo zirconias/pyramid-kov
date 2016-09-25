@@ -25,12 +25,11 @@
                     <td>{{ user.username }}</td>
                     <td>{{ user.email }}</td>
                     <td>
-                        <button rel="tooltip" onclick="deleteuser(this)" data-id="{{ user.id }}"
-                                class="btn btn-danger btn-simple btn-xs" data-original-title="Delete">delete
-                        </button>
-                        <button rel="tooltip" onclick="updateuser(this)" data-id="{{ user.id }}"
-                                class="btn btn-warning btn-simple btn-xs" data-original-title="Delete">update
-                        </button>
+                        <a class="btn btn-danger btn-simple btn-xs" href="#" onclick="deleteuser(this)"
+                           data-id="{{ user.id }}">delete</a>
+
+                        <a class="btn btn-warning btn-simple btn-xs" href="#" onclick="simple(this)"
+                           data-id="{{ user.id }}">update</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -51,14 +50,12 @@
     <script>
 
         function deleteuser(elt) {
-            //delete_user
-            {#            if (confirm("Do you realy want to delete this user")) {#}
             var ask = confirm("Do you realy want to delete this user");
             if (ask) {
                 $.ajax({
-                    url: '{{ request.route_url('delete_user') }}',
+                    url: 'api/users/' + elt.dataset.id,
                     type: 'DELETE',
-                    data: JSON.stringify({'id': elt.dataset.id}), // An object with the key 'submit' and value 'true;
+                    {#                    data: JSON.stringify({'id': elt.dataset.id}), // An object with the key 'submit' and value 'true;#}
                     success: function (res) {
                         if (res.id) {
                             window.location.href = "{{ request.route_url('users')}}";
@@ -67,6 +64,7 @@
                 });
             }
         }
+
         function updateuser(elt) {
             alert(elt.dataset.id)
         }
