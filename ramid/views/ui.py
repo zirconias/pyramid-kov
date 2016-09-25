@@ -19,6 +19,14 @@ class UIViews:
     def adduser(self):
         return dict()
 
+    @view_config(route_name='user', renderer='user.jinja2')
+    def user(self):
+        id = self.request.matchdict['id']
+        print(self.request.route_url('get_user', id=id))
+        subreq = self.request.blank(self.request.route_url('get_user', id=id))
+        response = self.request.invoke_subrequest(subreq)
+        return dict(user=response.json_body)
+
     @view_config(route_name='home')
     def home(self):
         return dict()

@@ -30,6 +30,22 @@ class UserViews:
 
         return usrs
 
+    @view_config(route_name='update_user')
+    def update_user(self):
+        # print('json_body: ', self.request.json_body)
+        id = self.request.matchdict['id']
+        user = self.request.json_body
+        for usr in USERS:
+            if usr.id == id:
+                print('lets: ')
+                usr.username = user['username']
+                usr.first_name = user['first_name']
+                usr.last_name = user['last_name']
+                usr.email = user['email']
+                return usr
+
+        return {'updated': 'false'}
+
     @view_config(route_name='add_user')
     def add_user(self):
         # params = dict(self.request.params)
