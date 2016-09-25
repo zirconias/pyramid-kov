@@ -28,8 +28,8 @@
                         <a class="btn btn-danger btn-simple btn-xs" href="#" onclick="deleteuser(this)"
                            data-id="{{ user.id }}">delete</a>
 
-                        <a class="btn btn-warning btn-simple btn-xs" href="#" onclick="simple(this)"
-                           data-id="{{ user.id }}">update</a>
+                        <a class="btn btn-warning btn-simple btn-xs"
+                           href="{{ request.route_url('user',id=user.id)  }}">update</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -64,33 +64,6 @@
                 });
             }
         }
-
-        function updateuser(elt) {
-            alert(elt.dataset.id)
-        }
-
-        {#        $("#addform").submit(function (event) {#}
-        {#            event.preventDefault();#}
-        {##}
-        {#            var data = $(this).serializeArray();#}
-        {#            var obj = {};#}
-        {#            for (var a = 0; a < data.length; a++)#}
-        {#                obj[data[a].name] = data[a].value;#}
-        {#            console.log('stringify : ' + JSON.stringify(obj));#}
-        {##}
-        {#            $.ajax({#}
-        {#                type: "post",#}
-        {#                url: "{{request.route_url('add_user')}}",#}
-        {#                data: JSON.stringify(obj),#}
-        {#                contentType: 'application/json; charset=utf-8',#}
-        {#                success: function (res) {#}
-        {#                    if (res.id) {#}
-        {#                        window.location.href = "{{ request.route_url('users')}}" + "?username=" + obj['username']#}
-        {#                    }#}
-        {#                }#}
-        {#            });#}
-        {#        });#}
-
 
     </script>
 
