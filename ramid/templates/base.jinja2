@@ -15,8 +15,8 @@
     <link href="../static/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../static/navbar.css" rel="stylesheet">
-    <script src="../static/jquery.min.js"></script>
+    <link href="{{ request.static_url('ramid:static/navmar.css') }}" rel="stylesheet">
+    <script src="{{ request.static_url('ramid:static/jquery.min.js') }}"></script>
 </head>
 
 <body>
@@ -54,9 +54,9 @@
 <!-- Placed at the end of the document so the pages load faster -->
 
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../static/tether.min.js"></script>
-<script src="../static/bootstrap.min.js"></script>
+<script src="{{ request.static_url('ramid:static/tether.min.js') }}"></script>
+<script src="{{ request.static_url('ramid:static/bootstrap.min.js') }}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../static/ie10-viewport-bug-workaround.js"></script>
+<script src="{{ request.static_url('ramid:static/ie10-viewport-bug-workaround.js') }}"></script>
 </body>
 </html>
