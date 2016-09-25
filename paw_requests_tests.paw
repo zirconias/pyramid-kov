@@ -170,7 +170,7 @@
     </object>
     <object type="LMREQUEST" id="z113">
         <attribute name="uuid" type="string">4394CD7C-9E49-4705-BC11-C2CD7840D82B</attribute>
-        <attribute name="url" type="string">http://localhost:6543/api/users/99386ea7-4660-434a-84e6-35b4be3aafb4</attribute>
+        <attribute name="url" type="string">http://localhost:6543/api/users/e5d613c3-ef99-4980-87b7-5bf4e73b28fb</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
@@ -184,8 +184,9 @@
         <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z125"></relationship>
     </object>
     <object type="LMREQUEST" id="z114">
+        <attribute name="body" type="string">[{"data":{"json":"{\\"id\\":\\"e5d613c3-ef99-4980-87b7-5bf4e73b28fb\\"}"},"identifier":"com.luckymarmot.JSONDynamicValue"}]</attribute>
         <attribute name="uuid" type="string">95F539BF-F487-4E20-98FA-2C789520FE42</attribute>
-        <attribute name="url" type="string">http://localhost:6543/api/users/507f7007-03d9-4ed4-abd1-7bb7d3fb3a91</attribute>
+        <attribute name="url" type="string">http://localhost:6543/api/users</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>

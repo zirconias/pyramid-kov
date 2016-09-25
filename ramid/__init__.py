@@ -16,7 +16,8 @@ def main(global_config, **settings):
     config.add_route('adduser', '/users/addUser')
 
     config.add_route('add_user', 'api/users', request_method='POST')
-    config.add_route('delete_user', 'api/users/{id}', request_method='DELETE')
+    config.add_route('delete_user', 'api/users',
+                     request_method='DELETE')  # dropping id from url , todo: using javascript
     config.add_route('get_all_users', 'api/users', request_method='GET')
     config.add_route('get_user', 'api/users/{id}', request_method='GET')
 
