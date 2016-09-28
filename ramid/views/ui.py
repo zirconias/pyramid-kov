@@ -27,6 +27,22 @@ class UIViews:
         response = self.request.invoke_subrequest(subreq)
         return dict(user=response.json_body)
 
+    @view_config(route_name='organisations', renderer='organisations.jinja2')
+    def organisations(self):
+        subreq = self.request.blank(self.request.route_url('get_all_organisations'))
+        response = self.request.invoke_subrequest(subreq)
+        json_payload = response.json_body
+
+        return dict(orgs=json_payload)
+
+    @view_config(route_name='organisation', renderer='organisation.jinja2')
+    def organisation(self):
+        id = self.request.matchdict['id']
+        print(self.request.route_url('get_organisation', id=id))
+        subreq = self.request.blank(self.request.route_url('get_organisation', id=id))
+        response = self.request.invoke_subrequest(subreq)
+        return dict(organisation=response.json_body)
+
     @view_config(route_name='home')
     def home(self):
         return dict()

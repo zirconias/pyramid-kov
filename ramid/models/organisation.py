@@ -6,12 +6,16 @@ def genuuid():
 
 
 class Organisation:
-    def __init__(self, name, description, contact):
+    # def __init__(self, name, description, contact):
+    #     self.id = genuuid()
+    #     self.name = name
+    #     self.description = description
+    #     self.contact = contact
+    #     self.users = []
+
+    def __init__(self, obj):
+        self.__dict__ = obj
         self.id = genuuid()
-        self.name = name
-        self.description = description
-        self.contact = contact
-        self.users = []
 
     def add_user(self, user):
         self.users.append(user)

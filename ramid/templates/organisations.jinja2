@@ -1,0 +1,71 @@
+{% extends "base.jinja2" %}
+{% block title %}Organisations list{% endblock %}
+{% block content %}
+    <h1>list of Organisations</h1>
+    <hr>
+
+    {% if request.params['name'] %}
+        <div class="alert alert-success">
+            <strong>{{ request.params['name'] }}</strong> created/updated successfully.
+        </div>
+    {% endif %}
+
+    {% if orgs %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>description</th>
+                <th>contact</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for org in orgs %}
+                <tr>
+                    <td>{{ org.name }}</td>
+                    <td>{{ org.description }}</td>
+                    <td>{{ org.contact }}</td>
+                    <td>
+                        <a class="btn btn-danger btn-simple btn-xs" href="#" onclick="deleteuser(this)"
+                           data-id="{{ org.id }}">delete</a>
+
+                        <a class="btn btn-warning btn-simple btn-xs"
+                           href="{{ request.route_url('organisation',id=org.id) }}">update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <span>Currently there are no organisations</span>
+    {% endif %}
+    <hr>
+    <a href="{{ request.route_url('adduser') }}">
+        <button type="button" class="btn btn-success">Add new organisation</button>
+    </a>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+
+        function deleteuser(elt) {
+            var ask = confirm("Do you realy want to delete this organisation");
+            if (ask) {
+                $.ajax({
+                    url: 'api/organisations/' + elt.dataset.id,
+                    type: 'DELETE',
+                    {#                    data: JSON.stringify({'id': elt.dataset.id}), // An object with the key 'submit' and value 'true;#}
+                    success: function (res) {
+                        if (res.id) {
+                            window.location.href = "{{ request.route_url('organisations')}}";
+                        }
+                    }
+                });
+            }
+        }
+
+    </script>
+
+{% endblock %}

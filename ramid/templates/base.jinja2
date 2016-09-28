@@ -34,6 +34,10 @@
                     <a class="nav-link" href="{{ request.route_url('home') }}">Home</a>
                 </li>
 
+                <li class="nav-item {% if request.matched_route.name == 'org' %} active{% endif %}">
+                    <a class="nav-link" href="{{ request.route_url('organisations') }}">Organisations</a>
+                </li>
+
                 <li class="nav-item {% if 'user' in request.matched_route.name %} active{% endif %}">
                     <a class="nav-link"
                        href="{{ request.route_url('users') }}">Users</a>

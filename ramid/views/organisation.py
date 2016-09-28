@@ -35,14 +35,16 @@ class OrganisationViews:
 
     @view_config(route_name='add_organisation')
     def add_organisation(self):
-        params = dict(self.request.params)
-        if not str(params['name']).isalnum():
+        print('json_body: ', self.request.json_body)
+
+        if not str(self.request.json_body['name']).isalnum():
             return {'created': 'false', 'message': 'please enter only alpha num chars'}
 
-        if (first(x for x in ORGANISATIONS if x.name == params['name'])):
+        if (first(x for x in ORGANISATIONS if x.name == self.request.json_body['name'])):
             return {'created': 'false', 'message': 'name already exists'}
 
-        neworg = Organisation(params["name"], params["description"], params["contact"])
+        neworg = Organisation(self.request.json_body)
+        # neworg = Organisation(params["name"], params["description"], params["contact"])
 
         ORGANISATIONS.append(neworg)
         return {'id': neworg.id, 'created': 'created'}
@@ -55,6 +57,20 @@ class OrganisationViews:
             return organisation
         else:
             return {'found': 'false', 'message': 'organisation not found'}
+
+    @view_config(route_name='update_organisation')
+    def update_organisation(self):
+        # print('json_body: ', self.request.json_body)
+        id = self.request.matchdict['id']
+        organisation = self.request.json_body
+        for org in ORGANISATIONS:
+            if org.id == id:
+                org.name = organisation['name']
+                org.description = organisation['description']
+                org.contact = organisation['contact']
+                return org
+
+        return {'updated': 'false'}
 
     @view_config(route_name='delete_organisation')
     def delete_organisation(self):
